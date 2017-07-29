@@ -1,4 +1,4 @@
-require 'make_voteable/voting'
+require 'make_voteable/voting_mixin'
 require 'make_voteable/voteable'
 require 'make_voteable/voter'
 require 'make_voteable/exceptions'
@@ -18,7 +18,7 @@ module MakeVoteable
   # class Question < ActiveRecord::Base
   #   make_voteable
   # end
-  def make_voteable 
+  def make_voteable
     include Voteable
   end
 
