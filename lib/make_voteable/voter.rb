@@ -39,6 +39,7 @@ module MakeVoteable
         save
         voteable.save
         voting.save
+        update_voteable voteable
       end
 
       true
@@ -121,6 +122,7 @@ module MakeVoteable
         save
         voteable.save
         voting.destroy
+        update_voteable voteable
       end
 
       true
@@ -164,6 +166,11 @@ module MakeVoteable
     end
 
     private
+
+    def update_voteable(voteable)
+      voteable.up_votes = Voting.where(:voteable_id => voteable.id, :voteable_type => voteable.class.to_s).count
+      voteable.save
+    end
 
     def fetch_voting(voteable)
       Voting.where(
