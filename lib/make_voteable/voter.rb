@@ -29,7 +29,13 @@ module MakeVoteable
           self.down_votes -= 1 if has_attribute?(:down_votes)
         end
       else
-        voting = Voting.create(:voteable => voteable, :voter_id => self.id, :voter_type => self.class.to_s, :up_vote => true)
+        voting = Voting.create(
+          :voteable_type => voteable.class.to_s,
+          :voteable_id => voteable.id,
+          :voter_id => self.id,
+          :voter_type => self.class.to_s,
+          :up_vote => true
+        )
       end
 
       voteable.up_votes += 1
@@ -73,7 +79,13 @@ module MakeVoteable
           self.up_votes -= 1 if has_attribute?(:up_votes)
         end
       else
-        voting = Voting.create(:voteable => voteable, :voter_id => self.id, :voter_type => self.class.to_s, :up_vote => false)
+        voting = Voting.create(
+          :voteable_type => voteable.class.to_s,
+          :voteable_id => voteable.id,
+          :voter_id => self.id,
+          :voter_type => self.class.to_s,
+          :up_vote => false
+        )
       end
 
       voteable.down_votes += 1
